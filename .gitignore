@@ -1,0 +1,12 @@
+# R package build artifacts
+*.Rproj.user/
+*.Rhistory
+*.RData
+*.Rdata
+src/*.o
+src/*.so
+src/*.dll
+
+# OS
+.DS_Store
+Thumbs.db

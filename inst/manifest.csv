@@ -1,0 +1,2 @@
+name,description,rows,cols,source,version
+example_wages,Wage and education data for labor economics,5000,8,Simulated,1.0.0
