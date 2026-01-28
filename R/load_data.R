@@ -13,12 +13,12 @@
 #' @examples
 #' \dontrun{
 #' # Load a dataset
-#' df <- gm_load("labor_data")
+#' df <- grossman::load("example_wages")
 #'
 #' # Force refresh from remote
-#' df <- gm_load("labor_data", refresh = TRUE)
+#' df <- grossman::load("example_wages", refresh = TRUE)
 #' }
-gm_load <- function(name, refresh = FALSE, format = c("parquet", "rds")) {
+load <- function(name, refresh = FALSE, format = c("parquet", "rds")) {
  format <- match.arg(format)
  ext <- if (format == "parquet") ".parquet" else ".rds"
  filename <- paste0(name, ext)
@@ -78,9 +78,9 @@ read_data_file <- function(path, format) {
 #'
 #' @examples
 #' \dontrun{
-#' gm_list()
+#' grossman::list()
 #' }
-gm_list <- function() {
+list <- function() {
  # This reads from a manifest file in the package
  manifest_path <- system.file("manifest.csv", package = "grossman")
 
@@ -102,12 +102,12 @@ gm_list <- function() {
 #' @examples
 #' \dontrun{
 #' # Clear all cached data
-#' gm_clear_cache()
+#' grossman::clear_cache()
 #'
 #' # Clear specific dataset
-#' gm_clear_cache("labor_data")
+#' grossman::clear_cache("example_wages")
 #' }
-gm_clear_cache <- function(name = NULL) {
+clear_cache <- function(name = NULL) {
  cache_dir <- grossman_cache_dir()
 
  if (is.null(name)) {
