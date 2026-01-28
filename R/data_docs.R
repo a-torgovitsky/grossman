@@ -3,7 +3,7 @@
 # This file contains roxygen2 documentation for datasets.
 # Students can access this via ?dataset_name after loading the package.
 #
-# Note: The data itself is NOT in the package. Students use gm_load("name")
+# Note: The data itself is NOT in the package. Students use grossman::load("name")
 # to download it. This documentation helps them understand what's available.
 
 #' Example Wages Dataset
@@ -11,7 +11,7 @@
 #' Simulated wage and education data for teaching labor economics.
 #' This is an example dataset to demonstrate the package structure.
 #'
-#' @format A data frame with 5,000 rows and 8 variables:
+#' @format A data frame with 50 rows and 8 variables:
 #' \describe{
 #'   \item{id}{Unique identifier}
 #'   \item{wage}{Hourly wage in USD}
@@ -28,7 +28,7 @@
 #' @examples
 #' \dontrun{
 #' # Load the dataset
-#' wages <- gm_load("example_wages")
+#' wages <- grossman::load("example_wages")
 #'
 #' # Basic analysis
 #' summary(wages$wage)
@@ -58,7 +58,7 @@ NULL
 # #'
 # #' @examples
 # #' \dontrun{
-# #' df <- gm_load("dataset_name")
+# #' df <- grossman::load("dataset_name")
 # #' }
 # #'
 # #' @name dataset_name
