@@ -18,5 +18,5 @@ Imports:
 Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://github.com/yourusername/grossman
-BugReports: https://github.com/yourusername/grossman/issues
+URL: https://github.com/a-torgovitsky/grossman
+BugReports: https://github.com/a-torgovitsky/grossman/issues
