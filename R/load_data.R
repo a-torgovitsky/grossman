@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Load a dataset
+#' # Load a dataset (use namespace prefix, don't library())
 #' df <- grossman::load("example_wages")
 #'
 #' # Force refresh from remote
@@ -79,6 +79,7 @@ read_data_file <- function(path, format) {
 #'
 #' @examples
 #' \dontrun{
+#' # See available datasets (use namespace prefix, don't library())
 #' grossman::list()
 #' }
 list <- function() {

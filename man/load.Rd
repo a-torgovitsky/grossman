@@ -22,7 +22,7 @@ download, data is served from a local cache for faster access.
 }
 \examples{
 \dontrun{
-# Load a dataset
+# Load a dataset (use namespace prefix, don't library())
 df <- grossman::load("example_wages")
 
 # Force refresh from remote

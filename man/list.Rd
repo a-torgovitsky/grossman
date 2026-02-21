@@ -15,6 +15,7 @@ Information is extracted from the package documentation.
 }
 \examples{
 \dontrun{
+# See available datasets (use namespace prefix, don't library())
 grossman::list()
 }
 }
