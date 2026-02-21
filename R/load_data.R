@@ -62,11 +62,11 @@ load <- function(name, refresh = FALSE, format = c("parquet", "rds")) {
 #' Read a data file based on format
 #' @keywords internal
 read_data_file <- function(path, format) {
- if (format == "parquet") {
-   arrow::read_parquet(path)
- } else {
-   readRDS(path)
- }
+  if (format == "parquet") {
+    nanoparquet::read_parquet(path)
+  } else {
+    readRDS(path)
+  }
 }
 
 #' List available datasets
