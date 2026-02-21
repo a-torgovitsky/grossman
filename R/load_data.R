@@ -72,8 +72,9 @@ read_data_file <- function(path, format) {
 #' List available datasets
 #'
 #' Shows all datasets available in the grossman collection.
+#' Information is extracted from the package documentation.
 #'
-#' @return A data frame with dataset names and descriptions.
+#' @return A data frame with dataset names, descriptions, and dimensions.
 #' @export
 #'
 #' @examples
@@ -81,14 +82,37 @@ read_data_file <- function(path, format) {
 #' grossman::list()
 #' }
 list <- function() {
- # This reads from a manifest file in the package
- manifest_path <- system.file("manifest.csv", package = "grossman")
+  rd <- tools::Rd_db("grossman")
 
- if (manifest_path == "") {
-   cli::cli_abort("Manifest file not found. Package may be incorrectly installed.")
- }
+  datasets <- lapply(names(rd), function(nm) {
+    doc <- rd[[nm]]
+    keywords <- tools:::.Rd_get_metadata(doc, "keyword")
 
- utils::read.csv(manifest_path, stringsAsFactors = FALSE)
+    # Only include dataset documentation
+    if (!"datasets" %in% keywords) return(NULL)
+
+    name <- tools:::.Rd_get_metadata(doc, "name")
+    title <- tools:::.Rd_get_metadata(doc, "title")
+    format_text <- tools:::.Rd_get_metadata(doc, "format")
+
+    # Parse "A data frame with X rows and Y variables" from format
+    rows <- cols <- NA_integer_
+    if (grepl("(\\d+)\\s+rows?\\s+and\\s+(\\d+)\\s+(variables?|columns?)", format_text)) {
+      m <- regmatches(format_text, regexec("(\\d+)\\s+rows?\\s+and\\s+(\\d+)", format_text))[[1]]
+      rows <- as.integer(m[2])
+      cols <- as.integer(m[3])
+    }
+
+    data.frame(
+      name = name,
+      description = title,
+      rows = rows,
+      cols = cols,
+      stringsAsFactors = FALSE
+    )
+  })
+
+  do.call(rbind, Filter(Negate(is.null), datasets))
 }
 
 #' Clear the local data cache
