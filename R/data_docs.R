@@ -91,28 +91,60 @@ NULL
 #' @keywords datasets
 NULL
 
+#' CPS (Current Population Survey) Dataset
+#'
+#' Individual-level data from the Current Population Survey (IPUMS-CPS) used
+#' for teaching gender wage gap analysis. Sample restrictions follow Blau and
+#' Kahn (2017): ages 25-64, full-time, non-self-employed, non-veteran workers
+#' with positive wage income and at least 26 weeks worked.
+#'
+#' @format A data frame with 48,371 rows and 16 variables:
+#' \describe{
+#'   \item{incwage}{Wage and salary income}
+#'   \item{sex}{Sex (Male, Female)}
+#'   \item{age}{Age in years (25-64)}
+#'   \item{educ}{Education level}
+#'   \item{state}{US state of residence}
+#'   \item{inctot}{Total personal income}
+#'   \item{race}{Race}
+#'   \item{marst}{Marital status}
+#'   \item{hispan}{Hispanic origin}
+#'   \item{ind}{Industry code (IPUMS CPS)}
+#'   \item{classwkr}{Class of worker}
+#'   \item{wkswork1}{Weeks worked last year}
+#'   \item{uhrsworkly}{Usual hours worked per week last year}
+#'   \item{metarea}{Metropolitan area}
+#'   \item{annualhours}{Hours worked last year (wkswork1 * uhrsworkly)}
+#'   \item{wage}{Hourly wage (incwage / annualhours)}
+#' }
+#'
+#' @source Flood, Sarah, Miriam King, Renae Rodgers, Steven Ruggles, J. Robert
+#' Warren, and Michael Westberry. IPUMS CPS: Version 8.0.
+#' Minneapolis, MN: IPUMS, 2020. \doi{10.18128/D030.V8.0}
+#'
+#' @references Blau, Francine D. and Lawrence M. Kahn. 2017. "The Gender Wage
+#' Gap: Extent, Trends, and Explanations." \emph{Journal of Economic
+#' Literature} 55(3): 789-865. \doi{10.1257/jel.20160995}
+#'
+#' @examples
+#' \dontrun{
+#' # Load the dataset
+#' cps <- grossman::load("cps")
+#'
+#' # Gender wage gap (geometric mean ratio, a la Blau and Kahn)
+#' lwf <- mean(log(cps$wage[cps$sex == "Female"]))
+#' lwm <- mean(log(cps$wage[cps$sex == "Male"]))
+#' exp(lwf - lwm)  # approximately 0.82
+#'
+#' # Mincer regression
+#' lm(log(wage) ~ sex + age + educ, data = cps)
+#' }
+#'
+#' @name cps
+#' @docType data
+#' @keywords datasets
+NULL
+
 # =============================================================================
 # Add more dataset documentation below using the same pattern
 # =============================================================================
-
-# #' Dataset Name
-# #'
-# #' Brief description.
-# #'
-# #' @format A data frame with X rows and Y variables:
-# #' \describe{
-# #'   \item{var1}{Description}
-# #'   \item{var2}{Description}
-# #' }
-# #'
-# #' @source Citation or URL
-# #'
-# #' @examples
-# #' \dontrun{
-# #' df <- grossman::load("dataset_name")
-# #' }
-# #'
-# #' @name dataset_name
-# #' @docType data
-# #' @keywords datasets
-# NULL
