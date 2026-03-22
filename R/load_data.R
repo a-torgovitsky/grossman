@@ -4,6 +4,7 @@
 #' download, data is served from a local cache for faster access.
 #'
 #' @param name Character. The name of the dataset to load (without file extension).
+#' @param variant Character. Optional variant of the dataset (e.g., "unbalanced", "micro").
 #' @param refresh Logical. If TRUE, re-download even if cached. Default FALSE.
 #'
 #' @return A data frame (tibble) containing the requested dataset.
@@ -14,11 +15,18 @@
 #' # Load a dataset (use namespace prefix, don't library())
 #' df <- grossman::load("example_wages")
 #'
+#' # Load a variant
+#' df <- grossman::load("psid", variant = "unbalanced")
+#'
 #' # Force refresh from remote
 #' df <- grossman::load("example_wages", refresh = TRUE)
 #' }
-load <- function(name, refresh = FALSE) {
- filename <- paste0(name, ".rds")
+load <- function(name, variant = NULL, refresh = FALSE) {
+ filename <- if (is.null(variant)) {
+   paste0(name, ".rds")
+ } else {
+   paste0(name, "_", variant, ".rds")
+ }
 
  cache_dir <- grossman_cache_dir()
  local_path <- file.path(cache_dir, filename)
@@ -108,6 +116,7 @@ list <- function() {
 #' Removes all cached datasets from the local machine.
 #'
 #' @param name Optional. If provided, only clears the cache for this dataset.
+#' @param variant Optional. If provided along with name, clears the variant.
 #' @return Invisible NULL
 #' @export
 #'
@@ -118,8 +127,11 @@ list <- function() {
 #'
 #' # Clear specific dataset
 #' grossman::clear_cache("example_wages")
+#'
+#' # Clear a variant
+#' grossman::clear_cache("psid", variant = "unbalanced")
 #' }
-clear_cache <- function(name = NULL) {
+clear_cache <- function(name = NULL, variant = NULL) {
  cache_dir <- grossman_cache_dir()
 
  if (is.null(name)) {
@@ -131,7 +143,12 @@ clear_cache <- function(name = NULL) {
      cli::cli_alert_info("Cache is already empty")
    }
  } else {
-   path <- file.path(cache_dir, paste0(name, ".rds"))
+   filename <- if (is.null(variant)) {
+     paste0(name, ".rds")
+   } else {
+     paste0(name, "_", variant, ".rds")
+   }
+   path <- file.path(cache_dir, filename)
    if (file.exists(path)) {
      file.remove(path)
      cli::cli_alert_success("Cleared cache for {.val {name}}")

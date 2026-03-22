@@ -4,10 +4,12 @@
 \alias{load}
 \title{Load a dataset from the grossman collection}
 \usage{
-load(name, refresh = FALSE)
+load(name, variant = NULL, refresh = FALSE)
 }
 \arguments{
 \item{name}{Character. The name of the dataset to load (without file extension).}
+
+\item{variant}{Character. Optional variant of the dataset (e.g., "unbalanced", "micro").}
 
 \item{refresh}{Logical. If TRUE, re-download even if cached. Default FALSE.}
 }
@@ -22,6 +24,9 @@ download, data is served from a local cache for faster access.
 \dontrun{
 # Load a dataset (use namespace prefix, don't library())
 df <- grossman::load("example_wages")
+
+# Load a variant
+df <- grossman::load("psid", variant = "unbalanced")
 
 # Force refresh from remote
 df <- grossman::load("example_wages", refresh = TRUE)

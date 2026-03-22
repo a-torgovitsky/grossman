@@ -4,10 +4,12 @@
 \alias{clear_cache}
 \title{Clear the local data cache}
 \usage{
-clear_cache(name = NULL)
+clear_cache(name = NULL, variant = NULL)
 }
 \arguments{
 \item{name}{Optional. If provided, only clears the cache for this dataset.}
+
+\item{variant}{Optional. If provided along with name, clears the variant.}
 }
 \value{
 Invisible NULL
@@ -22,5 +24,8 @@ grossman::clear_cache()
 
 # Clear specific dataset
 grossman::clear_cache("example_wages")
+
+# Clear a variant
+grossman::clear_cache("psid", variant = "unbalanced")
 }
 }
