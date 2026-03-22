@@ -5,7 +5,6 @@
 #'
 #' @param name Character. The name of the dataset to load (without file extension).
 #' @param refresh Logical. If TRUE, re-download even if cached. Default FALSE.
-#' @param format Character. The format to read. Default "parquet", also supports "rds".
 #'
 #' @return A data frame (tibble) containing the requested dataset.
 #' @export
@@ -18,10 +17,8 @@
 #' # Force refresh from remote
 #' df <- grossman::load("example_wages", refresh = TRUE)
 #' }
-load <- function(name, refresh = FALSE, format = c("parquet", "rds")) {
- format <- match.arg(format)
- ext <- if (format == "parquet") ".parquet" else ".rds"
- filename <- paste0(name, ext)
+load <- function(name, refresh = FALSE) {
+ filename <- paste0(name, ".rds")
 
  cache_dir <- grossman_cache_dir()
  local_path <- file.path(cache_dir, filename)
@@ -29,7 +26,7 @@ load <- function(name, refresh = FALSE, format = c("parquet", "rds")) {
  # Check cache unless refresh requested
  if (!refresh && file.exists(local_path)) {
    cli::cli_alert_info("Loading {.val {name}} from cache")
-   return(read_data_file(local_path, format))
+   return(readRDS(local_path))
  }
 
  # Download from remote
@@ -48,7 +45,7 @@ load <- function(name, refresh = FALSE, format = c("parquet", "rds")) {
    writeBin(httr2::resp_body_raw(resp), local_path)
    cli::cli_alert_success("Cached to {.path {local_path}}")
 
-   read_data_file(local_path, format)
+   readRDS(local_path)
 
  }, error = function(e) {
    cli::cli_abort(c(
@@ -57,16 +54,6 @@ load <- function(name, refresh = FALSE, format = c("parquet", "rds")) {
      "i" = "Check that the dataset exists at {.url {url}}"
    ))
  })
-}
-
-#' Read a data file based on format
-#' @keywords internal
-read_data_file <- function(path, format) {
-  if (format == "parquet") {
-    nanoparquet::read_parquet(path)
-  } else {
-    readRDS(path)
-  }
 }
 
 #' List available datasets
@@ -144,16 +131,13 @@ clear_cache <- function(name = NULL) {
      cli::cli_alert_info("Cache is already empty")
    }
  } else {
-   # Try both formats
-   for (ext in c(".parquet", ".rds")) {
-     path <- file.path(cache_dir, paste0(name, ext))
-     if (file.exists(path)) {
-       file.remove(path)
-       cli::cli_alert_success("Cleared cache for {.val {name}}")
-       return(invisible(NULL))
-     }
+   path <- file.path(cache_dir, paste0(name, ".rds"))
+   if (file.exists(path)) {
+     file.remove(path)
+     cli::cli_alert_success("Cleared cache for {.val {name}}")
+   } else {
+     cli::cli_alert_warning("{.val {name}} was not in cache")
    }
-   cli::cli_alert_warning("{.val {name}} was not in cache")
  }
 
  invisible(NULL)

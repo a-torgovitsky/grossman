@@ -4,14 +4,12 @@
 \alias{load}
 \title{Load a dataset from the grossman collection}
 \usage{
-load(name, refresh = FALSE, format = c("parquet", "rds"))
+load(name, refresh = FALSE)
 }
 \arguments{
 \item{name}{Character. The name of the dataset to load (without file extension).}
 
 \item{refresh}{Logical. If TRUE, re-download even if cached. Default FALSE.}
-
-\item{format}{Character. The format to read. Default "parquet", also supports "rds".}
 }
 \value{
 A data frame (tibble) containing the requested dataset.
