@@ -38,16 +38,7 @@ with positive wage income and at least 26 weeks worked.
 }
 \examples{
 \dontrun{
-# Load the dataset
 cps <- grossman::load("cps")
-
-# Gender wage gap (geometric mean ratio, a la Blau and Kahn)
-lwf <- mean(log(cps$wage[cps$sex == "Female"]))
-lwm <- mean(log(cps$wage[cps$sex == "Male"]))
-exp(lwf - lwm)  # approximately 0.82
-
-# Mincer regression
-lm(log(wage) ~ sex + age + educ, data = cps)
 }
 
 }

@@ -19,9 +19,6 @@ A data frame with 136 rows and 29 variables:
 \item{age}{Age in years}
 \item{female}{Female indicator}
 }
-
-A micro-level variant with 454,260 individual observations is available via
-\code{grossman::load("tenncare", variant = "micro")}.
 }
 \source{
 Garthwaite, Craig, Tal Gross, and Matthew J. Notowidigdo. 2014.
@@ -33,6 +30,15 @@ Garthwaite, Craig, Tal Gross, and Matthew J. Notowidigdo. 2014.
 State-year panel data on public health insurance and labor supply outcomes,
 used to study the effects of Tennessee's 2005 TennCare disenrollment.
 }
+\section{Variants}{
+
+\describe{
+\item{\code{"micro"}}{Individual-level repeated cross-section with
+454,260 rows and 28 variables. Includes survey weights for DD and DDD
+analysis. Load with \code{grossman::load("tenncare", variant = "micro")}.}
+}
+}
+
 \examples{
 \dontrun{
 tc <- grossman::load("tenncare")

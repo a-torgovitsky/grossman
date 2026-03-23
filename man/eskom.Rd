@@ -39,16 +39,7 @@ provides quasi-experimental variation in electricity access.
 }
 \examples{
 \dontrun{
-# Load the dataset
 eskom <- grossman::load("eskom")
-
-# Replicate Table 3, Column 4 (first stage)
-first_stage <- lm(eskom ~ gradient + km_to_grid + hh_dens + hh_pov +
-                  pr_female_hh_head + sex_ratio + pr_indian_or_white +
-                  km_to_road + km_to_town + pr_hs_men + pr_hs_women +
-                  d_water_access + d_toilet + as.factor(district),
-                  data = eskom)
-summary(first_stage)
 }
 
 }

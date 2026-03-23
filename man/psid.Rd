@@ -7,7 +7,7 @@
 \format{
 A data frame with 4,566 rows and 12 variables:
 \describe{
-\item{id}{Household head person id}
+\item{id}{Household head person ID}
 \item{year}{Year}
 \item{earn}{Earnings (household head)}
 \item{cons}{Consumption (total)}
@@ -20,9 +20,6 @@ A data frame with 4,566 rows and 12 variables:
 \item{fsize}{Family size}
 \item{earn2nd}{Earnings (2nd member)}
 }
-
-An unbalanced variant with 10,370 observations is available via
-\code{grossman::load("psid", variant = "unbalanced")}.
 }
 \source{
 Blundell, Richard, Luigi Pistaferri, and Ian Preston. 2008.
@@ -34,6 +31,15 @@ Blundell, Richard, Luigi Pistaferri, and Ian Preston. 2008.
 Balanced panel from the Panel Study of Income Dynamics on household
 earnings and consumption.
 }
+\section{Variants}{
+
+\describe{
+\item{\code{"unbalanced"}}{Unbalanced panel with 10,370 rows and 12
+variables. Includes all households, not just those observed in every
+period. Load with \code{grossman::load("psid", variant = "unbalanced")}.}
+}
+}
+
 \examples{
 \dontrun{
 psid <- grossman::load("psid")
