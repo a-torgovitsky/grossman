@@ -10,6 +10,85 @@
 # in README.md (add a row with the dataset name, description, dimensions, and
 # any variants).
 
+#' Bureaucrats (Village Officials) Dataset
+#'
+#' Village-year panel data from China on the assignment of College Graduate
+#' Village Officials (CGVOs) and welfare outcomes. Used to study the effect
+#' of improved bureaucrat quality on poverty alleviation.
+#'
+#' @format A data frame with 2,809 rows and 18 variables:
+#' \describe{
+#'   \item{village}{Village ID}
+#'   \item{year}{Year}
+#'   \item{cgvo}{CGVO has been assigned}
+#'   \item{l_subsidy_rate}{Log subsidized population (per 1000)}
+#'   \item{l_poor_housing_rate}{Log poor housing households (per 100)}
+#'   \item{l_poor_reg_rate}{Log registered poor households (per 100)}
+#'   \item{l_disability_rate}{Log population with disabilities (per 1000)}
+#'   \item{district}{District ID}
+#'   \item{precipitation}{Daily average precipitation (inches)}
+#'   \item{temperature}{Daily average temperature (Fahrenheit)}
+#'   \item{Lead_D4_plus}{Relative time <= -4}
+#'   \item{Lead_D3}{Relative time -3}
+#'   \item{Lead_D2}{Relative time -2}
+#'   \item{Lead_D1}{Relative time -1}
+#'   \item{D0}{Relative time 0}
+#'   \item{Lag_D1}{Relative time 1}
+#'   \item{Lag_D2}{Relative time 2}
+#'   \item{Lag_D3_plus}{Relative time >= 3}
+#' }
+#'
+#' @source He, Guojun and Shaoda Wang. 2017. "Do College Graduates Serving
+#' as Village Officials Help Rural China?" \emph{American Economic Journal:
+#' Applied Economics} 9(4): 186-215. \doi{10.1257/app.20160079}
+#'
+#' @examples
+#' \dontrun{
+#' bureaucrats <- grossman::load("bureaucrats")
+#' }
+#'
+#' @name bureaucrats
+#' @docType data
+#' @keywords datasets
+NULL
+
+#' Child Penalty Dataset
+#'
+#' PSID panel data on earnings around first childbirth, used to study
+#' child penalties in the labor market. Uses edited replication files
+#' that remove the event-time restriction from the original study.
+#'
+#' @format A data frame with 54,365 rows and 12 variables:
+#' \describe{
+#'   \item{id}{Person identifier}
+#'   \item{year}{Survey year}
+#'   \item{earn}{Earnings}
+#'   \item{byear}{Year of first childbirth}
+#'   \item{female}{Female indicator}
+#'   \item{hours}{Hours worked}
+#'   \item{full_time}{Full-time indicator}
+#'   \item{age}{Age at pregnancy}
+#'   \item{educ}{Education}
+#'   \item{industry}{Industry of household head}
+#'   \item{race}{Race/ethnicity}
+#'   \item{region}{Census region}
+#' }
+#'
+#' @source Cortés, Patricia and Jessica Pan. 2023.
+#' "Children and the Remaining Gender Gaps in the Labor Market."
+#' \emph{Journal of Economic Literature} 61(4): 1359-1409.
+#' \doi{10.1257/jel.20221549}
+#'
+#' @examples
+#' \dontrun{
+#' childpen <- grossman::load("childpen")
+#' }
+#'
+#' @name childpen
+#' @docType data
+#' @keywords datasets
+NULL
+
 #' Eskom Electrification Dataset
 #'
 #' Community-level data from South Africa used to study the effects of rural
@@ -136,6 +215,112 @@ NULL
 #' }
 #'
 #' @name tenncare
+#' @docType data
+#' @keywords datasets
+NULL
+
+#' PISA Incentive Experiment Dataset
+#'
+#' Experimental data on test score incentives in US and Chinese schools.
+#' Students were randomly assigned to receive financial incentives for
+#' performance on a low-stakes test (PISA-style).
+#'
+#' @format A data frame with 1,103 rows and 21 variables:
+#' \describe{
+#'   \item{score}{Test score}
+#'   \item{incent}{Treatment: received incentive (1=yes, 0=no)}
+#'   \item{us_school1_reg}{US school 1, regular class}
+#'   \item{us_school1_hon}{US school 1, honors class}
+#'   \item{us_school2_reg}{US school 2, regular class}
+#'   \item{us_school2_hon}{US school 2, honors class}
+#'   \item{us}{United States indicator (1=US, 0=China)}
+#'   \item{group}{Treatment group assignment}
+#'   \item{school}{School identifier}
+#'   \item{female}{Female indicator (1=female, 0=male)}
+#'   \item{black}{Black}
+#'   \item{asian}{Asian}
+#'   \item{hisp_white}{Hispanic White}
+#'   \item{hisp_nw}{Hispanic Non-white}
+#'   \item{other}{Other race/ethnicity}
+#'   \item{age}{Age}
+#'   \item{agemissing}{Age missing indicator}
+#'   \item{sh_school2}{Share school 2}
+#'   \item{sh_school3}{Share school 3}
+#'   \item{sh_school4}{Share school 4}
+#'   \item{t2018}{Year 2018 indicator}
+#' }
+#'
+#' @source Gneezy, Uri, John A. List, Jeffrey A. Livingston, Xiangdong Qin,
+#' Sally Sadoff, and Yang Xu. 2019. "Measuring Success in Education: The Role
+#' of Effort on the Test Itself." \emph{American Economic Review: Insights}
+#' 1(3): 291-308. \doi{10.1257/aeri.20180633}
+#'
+#' @examples
+#' \dontrun{
+#' pisa <- grossman::load("pisa")
+#' }
+#'
+#' @name pisa
+#' @docType data
+#' @keywords datasets
+NULL
+
+#' Union Wage Panel Dataset
+#'
+#' Panel data on wages and union status for young men, used to study the
+#' effect of unions on wages.
+#'
+#' @format A data frame with 4,360 rows and 36 variables:
+#' \describe{
+#'   \item{nr}{Person identifier}
+#'   \item{year}{Observation year}
+#'   \item{ag}{Industry: Agriculture}
+#'   \item{black}{Black}
+#'   \item{bus}{Industry: Business & Repair Service}
+#'   \item{con}{Industry: Construction}
+#'   \item{ent}{Industry: Entertainment}
+#'   \item{exper}{Experience (Age - 6 - Schooling)}
+#'   \item{fin}{Industry: Finance}
+#'   \item{hisp}{Hispanic}
+#'   \item{hlth}{Has health disability}
+#'   \item{hours}{Hours worked (year)}
+#'   \item{man}{Industry: Manufacturing}
+#'   \item{mar}{Married}
+#'   \item{min}{Industry: Mining}
+#'   \item{nc}{Lives in North Central}
+#'   \item{ne}{Lives in North East}
+#'   \item{occ1}{Occupation: Professional, Technical and kindred}
+#'   \item{occ2}{Occupation: Managers, Officials and Proprietors}
+#'   \item{occ3}{Occupation: Sales Workers}
+#'   \item{occ4}{Occupation: Clerical and kindred}
+#'   \item{occ5}{Occupation: Craftsmen, Foremen and kindred}
+#'   \item{occ6}{Occupation: Operatives and kindred}
+#'   \item{occ7}{Occupation: Laborers and farmers}
+#'   \item{occ8}{Occupation: Farm Laborers and Foreman}
+#'   \item{occ9}{Occupation: Service Workers}
+#'   \item{per}{Industry: Personal Service}
+#'   \item{pro}{Industry: Professional & Related Service}
+#'   \item{pub}{Industry: Public Administration}
+#'   \item{rur}{Lives in rural area}
+#'   \item{s}{Lives in South}
+#'   \item{school}{Years of schooling}
+#'   \item{tra}{Industry: Transportation}
+#'   \item{trad}{Industry: Trade}
+#'   \item{union}{Wage set by collective bargaining}
+#'   \item{wage}{Log of hourly wage}
+#' }
+#'
+#' @source Vella, Francis and Marno Verbeek. 1998. "Whose Wages Do Unions
+#' Raise? A Dynamic Model of Unionism and Wage Rate Determination for Young
+#' Men." \emph{Journal of Applied Econometrics} 13(2): 163-183.
+#' \doi{10.1002/(SICI)1099-1255(199803/04)13:2<163::AID-JAE460>3.0.CO;2-Y}
+#'
+#' @examples
+#' \dontrun{
+#' unions <- grossman::load("unions")
+#' }
+#'
+#' @name unions
 #' @docType data
 #' @keywords datasets
 NULL

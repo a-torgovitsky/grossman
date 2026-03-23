@@ -34,7 +34,11 @@ df <- grossman::load("psid", refresh = TRUE)
 
 | Dataset    | Description                                              | Rows  | Cols | Variants     |
 | ---------- | -------------------------------------------------------- | ----- | ---- | ------------ |
+| `bureaucrats` | Village officials in China (He & Wang 2017)              | 2809  | 18   |              |
+| `childpen` | Child penalty panel (Cortés & Pan 2023)                    | 54365 | 12   |              |
 | `cps`      | IPUMS CPS wage data (Blau & Kahn 2017 sample)            | 48371 | 16   |              |
 | `eskom`    | South African rural electrification (Dinkelman 2011)     | 1816  | 18   |              |
 | `psid`     | PSID earnings & consumption panel (Blundell et al. 2008) | 4566  | 12   | `unbalanced` |
+| `pisa`     | PISA incentive experiment (Gneezy et al. 2019)            | 1103  | 21   |              |
 | `tenncare` | TennCare DiD panel (Garthwaite et al. 2014)              | 136   | 29   | `micro`      |
+| `unions`   | Union wage panel (Vella & Verbeek 1998)                   | 4360  | 36   |              |
