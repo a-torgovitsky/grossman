@@ -11,8 +11,6 @@ remotes::install_github("a-torgovitsky/grossman")
 
 ## Usage
 
-**Important:** Always use the `grossman::` prefix — do not call `library(grossman)`. The package exports functions named `list` and `load`, which would mask base R functions. This is the same pattern as `here::here()` or `remotes::install_github()`.
-
 ```r
 # See available datasets
 grossman::list()
@@ -30,11 +28,13 @@ df_ub <- grossman::load("psid", variant = "unbalanced")
 df <- grossman::load("psid", refresh = TRUE)
 ```
 
+**Important:** Always use the `grossman::` prefix — do not call `library(grossman)`. The package exports functions named `list` and `load`, which would mask base R functions. This is the same pattern as `here::here()` or `remotes::install_github()`.
+
 ## Available Datasets
 
-| Dataset | Description | Rows | Cols | Variants |
-|---------|-------------|------|------|----------|
-| `cps` | IPUMS CPS wage data (Blau & Kahn 2017 sample) | 48371 | 16 | |
-| `eskom` | South African rural electrification (Dinkelman 2011) | 1816 | 18 | |
-| `psid` | PSID earnings & consumption panel (Blundell et al. 2008) | 4566 | 12 | `unbalanced` |
-| `tenncare` | TennCare DiD panel (Garthwaite et al. 2014) | 136 | 29 | `micro` |
+| Dataset    | Description                                              | Rows  | Cols | Variants     |
+| ---------- | -------------------------------------------------------- | ----- | ---- | ------------ |
+| `cps`      | IPUMS CPS wage data (Blau & Kahn 2017 sample)            | 48371 | 16   |              |
+| `eskom`    | South African rural electrification (Dinkelman 2011)     | 1816  | 18   |              |
+| `psid`     | PSID earnings & consumption panel (Blundell et al. 2008) | 4566  | 12   | `unbalanced` |
+| `tenncare` | TennCare DiD panel (Garthwaite et al. 2014)              | 136   | 29   | `micro`      |
