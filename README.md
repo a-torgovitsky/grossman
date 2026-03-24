@@ -44,8 +44,8 @@ If you prefer to access the data files directly (`.rds` and `.json`), they are h
 | `eskom`    | South African rural electrification (Dinkelman 2011)     | 1816   | 18  |              |
 | `hurricane` | Hurricane fiscal costs (Deryugina 2017)                  | 49698  | 7   |              |
 | `kenyagrid` | Kenya rural electrification (Lee et al. 2020)            | 4368   | 52  |              |
-| `nit`      | Negative income tax experiment (SIME/DIME)                | 9720   | 12  |              |
 | `kindy`    | Kindergarten & maternal labor (Gelbach 2002)              | 17817  | 23  |              |
+| `nit`      | Negative income tax experiment (SIME/DIME)                | 9720   | 12  |              |
 | `olyset`   | Mosquito net adoption (Dupas 2014)                        | 1078   | 4   |              |
 | `pisa`     | PISA incentive experiment (Gneezy et al. 2019)            | 1103   | 21  |              |
 | `psid`     | PSID earnings & consumption (Blundell et al. 2008)        | 4566   | 12  | `unbalanced` |
