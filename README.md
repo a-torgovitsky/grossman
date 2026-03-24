@@ -30,6 +30,8 @@ df <- grossman::load("psid", refresh = TRUE)
 
 **Important:** Always use the `grossman::` prefix — do not call `library(grossman)`. The package exports functions named `list` and `load`, which would mask base R functions. This is the same pattern as `here::here()` or `remotes::install_github()`.
 
+If you prefer to access the data files directly (`.rds` and `.json`), they are hosted at [grossman-data](https://github.com/a-torgovitsky/grossman-data).
+
 ## Available Datasets
 
 | Dataset    | Description                                              | Rows  | Cols | Variants     |
