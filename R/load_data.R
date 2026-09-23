@@ -3,6 +3,10 @@
 #' Downloads and caches datasets from the remote repository. After the first
 #' download, data is served from a local cache for faster access.
 #'
+#' Every call prints a one-line summary of the dataset's dimensions, e.g.
+#' `cps: 48371 rows x 16 columns`. A download notice is printed only when the
+#' dataset is fetched from the remote repository.
+#'
 #' @param name Character. The name of the dataset to load (without file extension).
 #' @param variant Character. Optional variant of the dataset (e.g., "unbalanced", "micro").
 #' @param refresh Logical. If TRUE, re-download even if cached. Default FALSE.
@@ -22,46 +26,34 @@
 #' df <- grossman::load("example_wages", refresh = TRUE)
 #' }
 load <- function(name, variant = NULL, refresh = FALSE) {
- filename <- if (is.null(variant)) {
-   paste0(name, ".rds")
- } else {
-   paste0(name, "_", variant, ".rds")
- }
+  stem <- if (is.null(variant)) name else paste0(name, "_", variant)
+  filename <- paste0(stem, ".rds")
+  local_path <- file.path(grossman_cache_dir(), filename)
 
- cache_dir <- grossman_cache_dir()
- local_path <- file.path(cache_dir, filename)
+  if (refresh || !file.exists(local_path)) {
+    url <- paste0(grossman_data_url(), "/", filename)
+    cli::cli_alert_info("Downloading {.val {stem}} from remote...")
 
- # Check cache unless refresh requested
- if (!refresh && file.exists(local_path)) {
-   cli::cli_alert_info("Loading {.val {name}} from cache")
-   return(readRDS(local_path))
- }
+    tryCatch({
+      resp <- httr2::req_perform(httr2::request(url))
 
- # Download from remote
- url <- paste0(grossman_data_url(), "/", filename)
- cli::cli_alert_info("Downloading {.val {name}} from remote...")
+      if (httr2::resp_status(resp) != 200) {
+        cli::cli_abort("Dataset {.val {stem}} not found (HTTP {httr2::resp_status(resp)})")
+      }
 
- tryCatch({
-   req <- httr2::request(url)
-   resp <- httr2::req_perform(req)
+      writeBin(httr2::resp_body_raw(resp), local_path)
+    }, error = function(e) {
+      cli::cli_abort(c(
+        "Failed to download {.val {stem}}",
+        "x" = conditionMessage(e),
+        "i" = "Check that the dataset exists at {.url {url}}"
+      ))
+    })
+  }
 
-   if (httr2::resp_status(resp) != 200) {
-     cli::cli_abort("Dataset {.val {name}} not found (HTTP {httr2::resp_status(resp)})")
-   }
-
-   # Save to cache
-   writeBin(httr2::resp_body_raw(resp), local_path)
-   cli::cli_alert_success("Cached to {.path {local_path}}")
-
-   readRDS(local_path)
-
- }, error = function(e) {
-   cli::cli_abort(c(
-     "Failed to download {.val {name}}",
-     "x" = conditionMessage(e),
-     "i" = "Check that the dataset exists at {.url {url}}"
-   ))
- })
+  df <- readRDS(local_path)
+  cli::cli_inform("{stem}: {nrow(df)} rows x {ncol(df)} columns")
+  df
 }
 
 #' List available datasets

@@ -19,6 +19,10 @@ A data frame (tibble) containing the requested dataset.
 \description{
 Downloads and caches datasets from the remote repository. After the first
 download, data is served from a local cache for faster access.
+
+Every call prints a one-line summary of the dataset's dimensions, e.g.
+\code{cps: 48371 rows x 16 columns}. A download notice is printed only when the
+dataset is fetched from the remote repository.
 }
 \examples{
 \dontrun{
