@@ -54,5 +54,6 @@ If you prefer to access the data files directly (`.rds` and `.json`), they are h
 | `reservations` | Native American reservations (Dippel 2014)            | 182    | 19  |              |
 | `tenncare` | TennCare disenrollment (Garthwaite et al. 2014)          | 136    | 29  | `micro`      |
 | `thirdkid` | Family size & labor supply (Angrist & Evans 1998)         | 254652 | 34  |              |
+| `uiaustria` | Austrian unemployment spells (Nekoei & Weber 2017)      | 1738787 | 18 |              |
 | `unions`   | Union wages (Vella & Verbeek 1998)                        | 4360   | 36  |              |
 | `widows`   | Land inheritance in Zambia (Dillon & Voena 2018)          | 7825   | 16  |              |
